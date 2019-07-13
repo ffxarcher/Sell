@@ -1,0 +1,11 @@
+#需要为数据库指定时区否则可能出现时间不一致的问题
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: ffx10101fsn
+    url: jdbc:mysql://127.0.0.1:3306/spring?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=Hongkong
+#指定url的前缀
+server:
+  servlet:
+    context-path: /sell
