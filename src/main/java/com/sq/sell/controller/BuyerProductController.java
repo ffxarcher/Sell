@@ -7,6 +7,7 @@ import com.sq.sell.entity.ProductCategory;
 import com.sq.sell.entity.ProductInfo;
 import com.sq.sell.service.CategoryService;
 import com.sq.sell.service.ProductService;
+import com.sq.sell.utils.ResultVoUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,9 +45,7 @@ public class BuyerProductController {
         /**
          * 3、数据的拼装
          */
-        ResultVo resultVo = new ResultVo();
-        resultVo.setCode(0);
-        resultVo.setMessage("success");
+
         List<ProductVo> productVoList = new ArrayList<>();
 
         for (ProductCategory productCategory : productCategoryList) {
@@ -67,8 +66,8 @@ public class BuyerProductController {
             productVoList.add(productVo);
         }
 
-        resultVo.setData(productVoList);
-        return resultVo;
+
+        return ResultVoUtil.success(productVoList);
     }
 
 }
