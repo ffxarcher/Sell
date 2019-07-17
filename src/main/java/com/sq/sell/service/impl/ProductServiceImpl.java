@@ -47,6 +47,8 @@ public class ProductServiceImpl implements ProductService {
     /**
      * 记录一下getone和findone的区别
      * getone无法正常运行
+     * 在高并发的情况下，可能会出现多扣库存的超卖情况
+     * 需要进一步进行多线程优化
      * @param carDTOList
      */
 

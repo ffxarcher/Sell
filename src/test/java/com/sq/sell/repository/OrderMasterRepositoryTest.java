@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
+/**
+ * findOne已完成测试
+ */
 public class OrderMasterRepositoryTest extends SellApplicationTests {
     @Autowired
     private  OrderMasterRepository orderMasterRepository;
@@ -31,6 +34,7 @@ public class OrderMasterRepositoryTest extends SellApplicationTests {
     }
 
     @Test
+    @Ignore
     public void orderMasterRepositorySaveTest()
     {
         OrderMaster orderMaster = new OrderMaster();
@@ -47,6 +51,13 @@ public class OrderMasterRepositoryTest extends SellApplicationTests {
         orderMasterRepository.save(orderMaster);
 
     }
+
+    @Test
+    public void setOrderMasterRepositoryFindOneTest()
+    {
+        System.out.println(orderMasterRepository.findById("1234567").get());
+    }
+
 
 
 }
