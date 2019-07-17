@@ -17,6 +17,7 @@ public class ProductRepositoryTest extends SellApplicationTests {
     @Test
     public void productRepositoryTest()
     {
+        System.out.println(productRepository.findById("157875196366160022").get());
         Assert.assertNotEquals(0, productRepository.findByProductStatus(0).size());
     }
 

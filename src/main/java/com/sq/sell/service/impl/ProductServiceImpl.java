@@ -1,13 +1,17 @@
 package com.sq.sell.service.impl;
 
+import com.sq.sell.dto.CarDTO;
 import com.sq.sell.entity.ProductInfo;
 import com.sq.sell.enums.ProductStatusEnum;
+import com.sq.sell.enums.ResultEnum;
+import com.sq.sell.exception.SellException;
 import com.sq.sell.repository.ProductRepository;
 import com.sq.sell.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -33,5 +37,36 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductInfo save(ProductInfo productInfo) {
         return productRepository.save(productInfo);
+    }
+
+    @Override
+    public void increaseStock(List<CarDTO> carDTOList) {
+
+    }
+
+    /**
+     * 记录一下getone和findone的区别
+     * getone无法正常运行
+     * @param carDTOList
+     */
+
+    @Override
+    @Transactional
+    public void decrease(List<CarDTO> carDTOList) {
+        for (CarDTO carDTO : carDTOList)
+        {
+            ProductInfo productInfo = productRepository.findById(carDTO.getProductId()).get();
+            if(productInfo == null)
+            {
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIT);
+            }
+            int result = productInfo.getProductStock() - carDTO.getProductQuantity();
+            if(result < 0)
+            {
+                throw new SellException(ResultEnum.PRODUCT_STOCK_ERROR);
+            }
+            productInfo.setProductStock(result);
+            productRepository.save(productInfo);
+        }
     }
 }
