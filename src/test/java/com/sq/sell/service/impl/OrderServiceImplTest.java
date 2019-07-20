@@ -15,6 +15,8 @@ import static org.junit.Assert.*;
 
 /**
  * orderService findOne 测试完成
+ * cancel功能测试完成，还有返回支付金额待Todo
+ * finish功能测试完成
  */
 
 public class OrderServiceImplTest extends SellApplicationTests {
@@ -48,11 +50,38 @@ public class OrderServiceImplTest extends SellApplicationTests {
     }
 
     @Test
+    @Ignore
     public void findList()
     {
         PageRequest pageRequest = new PageRequest(0,4);
         System.out.println(orderService.findList("1101110",pageRequest).getContent());
         System.out.println(orderService.findList("1101110",pageRequest).getTotalElements());
+    }
+
+    @Test
+    @Ignore
+    public void cancelTest()
+    {
+        OrderDTO orderDTO = orderService.findOne("1234567");
+        orderDTO = orderService.cancel(orderDTO);
+        System.out.println(orderDTO.getOrderStatus());
+    }
+
+
+    @Test
+    public void finishTest()
+    {
+        OrderDTO orderDTO = orderService.findOne("1234567");
+        orderDTO = orderService.finish(orderDTO);
+        System.out.println(orderDTO.getOrderStatus());
+    }
+
+    @Test
+    public void paidTest()
+    {
+        OrderDTO orderDTO = orderService.findOne("1234567");
+        orderDTO = orderService.paid(orderDTO);
+        System.out.println(orderDTO.getPayStatus());
     }
 
 }

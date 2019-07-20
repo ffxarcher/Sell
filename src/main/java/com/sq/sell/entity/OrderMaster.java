@@ -1,8 +1,10 @@
 package com.sq.sell.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sq.sell.enums.OrderStatusEnum;
 import com.sq.sell.enums.PayStatusEnum;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -33,8 +35,12 @@ public class OrderMaster {
     //支付状态
     private Integer payStatus = PayStatusEnum.WAIT.getCode();
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
 }
