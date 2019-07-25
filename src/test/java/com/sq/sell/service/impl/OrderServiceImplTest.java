@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
  * orderService findOne 测试完成
  * cancel功能测试完成，还有返回支付金额待Todo
  * finish功能测试完成
+ * 查找所有订单完成测试
  */
 
 public class OrderServiceImplTest extends SellApplicationTests {
@@ -82,6 +83,13 @@ public class OrderServiceImplTest extends SellApplicationTests {
         OrderDTO orderDTO = orderService.findOne("1234567");
         orderDTO = orderService.paid(orderDTO);
         System.out.println(orderDTO.getPayStatus());
+    }
+
+    @Test
+    public void findAll()
+    {
+        PageRequest pageRequest = new PageRequest(0,4);
+        System.out.println(orderService.findList(pageRequest).getContent());
     }
 
 }

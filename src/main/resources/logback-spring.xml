@@ -43,7 +43,6 @@
         <appender-ref ref = "consoleLog"></appender-ref>
         <appender-ref ref = "fileInfoLog"></appender-ref>
         <appender-ref ref = "fileErrorLog"></appender-ref>
-
     </root>
 
 </configuration>

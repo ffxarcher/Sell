@@ -1,7 +1,12 @@
 package com.sq.sell.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sq.sell.entity.OrderDetail;
+import com.sq.sell.enums.OrderStatusEnum;
+import com.sq.sell.enums.PayStatusEnum;
+import com.sq.sell.utils.EnumUtil;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
 
     private String orderId;
@@ -37,4 +43,16 @@ public class OrderDTO {
     private Date updateTime;
 
     private List<OrderDetail> orderDetailList;
+
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum()
+    {
+        return EnumUtil.getByCode(orderStatus,OrderStatusEnum.class);
+
+    }
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum()
+    {
+        return EnumUtil.getByCode(payStatus,PayStatusEnum.class);
+    }
 }

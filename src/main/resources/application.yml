@@ -1,4 +1,5 @@
 #需要为数据库指定时区否则可能出现时间不一致的问题
+#jackson为全局配置null字段不反回
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -6,7 +7,15 @@ spring:
     password: ffx10101fsn
     url: jdbc:mysql://localhost:3306/spring?useUnicode=true
          &characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=CTT
+  jackson:
+    default-property-inclusion: non_null
 #指定url的前缀
 server:
   servlet:
     context-path: /sell
+
+#微信配置
+wechat:
+  myAppid: wx88eb989146661214
+  myAppSecret: c787d3bdda534e32d366580ddc29ae8b
+
