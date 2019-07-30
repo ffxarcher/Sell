@@ -1,6 +1,9 @@
 package com.sq.sell.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sq.sell.enums.ProductStatusEnum;
+import com.sq.sell.utils.EnumUtil;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,7 +40,7 @@ public class ProductInfo {
     /**
      * 0正常1下架
      */
-    private Integer productStatus;
+    private Integer productStatus = ProductStatusEnum.UP.getCode();
 
     private Integer categoryType;
 
@@ -49,5 +52,10 @@ public class ProductInfo {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
+    @JsonIgnore
+    public ProductStatusEnum getProductStatusEnum()
+    {
+        return EnumUtil.getByCode(productStatus,ProductStatusEnum.class);
+    }
 
 }

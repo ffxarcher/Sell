@@ -9,6 +9,9 @@ spring:
          &characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=CTT
   jackson:
     default-property-inclusion: non_null
+  redis:
+    host: 127.0.0.1
+    port: 6379
 #指定url的前缀
 server:
   servlet:
@@ -17,5 +20,8 @@ server:
 #微信配置
 wechat:
   myAppid: wx88eb989146661214
-  myAppSecret: c787d3bdda534e32d366580ddc29ae8b
+  myAppSecret:
+
+projecturl:
+  sell: http://sqmysell.natapp1.cc
 
