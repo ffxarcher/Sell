@@ -13,6 +13,8 @@ import com.sq.sell.repository.OrderDetailRepository;
 import com.sq.sell.repository.OrderMasterRepository;
 import com.sq.sell.service.OrderService;
 import com.sq.sell.service.ProductService;
+import com.sq.sell.service.PushMessage;
+import com.sq.sell.service.WebSocket;
 import com.sq.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -41,6 +43,10 @@ public class OrderServiceImpl implements OrderService {
     private OrderDetailRepository orderDetailRepository;
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+    @Autowired
+    private PushMessage pushMessage;
+    @Autowired
+    private WebSocket webSocket;
 
     /**
      * 创建一个新的订单
@@ -76,8 +82,8 @@ public class OrderServiceImpl implements OrderService {
          * ！！！！！！一定要注意
          */
 
+        orderDTO.setOrderId(orderId);
         BeanUtils.copyProperties(orderDTO, orderMaster);
-        orderMaster.setOrderId(orderId);
         orderMaster.setOrderAmount(orderAmount);
         orderMaster.setCreateTime(new Date());
         orderMaster.setUpdateTime(new Date());
@@ -91,6 +97,9 @@ public class OrderServiceImpl implements OrderService {
                 new CarDTO(e.getProductId(), e.getProductQuantity())
         ).collect(Collectors.toList());
         productService.decrease(carDTOList);
+
+        //5、发送消息
+        webSocket.sendMessage("有新的订单: "+orderId);
 
         return orderDTO;
     }
@@ -159,6 +168,10 @@ public class OrderServiceImpl implements OrderService {
             log.error("【完成订单】更新失败，orderMaster={}",orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
+
+        //推送微信模版消息通知订单完结
+        pushMessage.orderStatus(orderDTO);
+
         return orderDTO;
     }
 

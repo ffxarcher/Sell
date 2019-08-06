@@ -1,7 +1,9 @@
 package com.sq.sell.exception;
 
 import com.sq.sell.enums.ResultEnum;
+import lombok.Data;
 
+@Data
 public class SellException extends RuntimeException {
 
     private Integer code;

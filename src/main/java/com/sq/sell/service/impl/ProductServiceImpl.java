@@ -21,7 +21,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductInfo findOne(String productId) {
-        return productRepository.findById(productId).get();
+
+        if(!productRepository.findById(productId).isPresent())
+        {
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIT);
+        }
+        else{
+            return productRepository.findById(productId).get();
+        }
+
     }
 
     @Override
