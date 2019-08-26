@@ -61,13 +61,13 @@
                             <#if currentPage == index>
                                 <li class="disabled"><a href="#">${index}</a></li>
                             <#else>
-                                <li><a href="/sell/seller/order/list?page=${index}&${size}">${index}</a></li>
+                                <li><a href="/sell/seller/order/list?page=${index}&size=${size}">${index}</a></li>
                             </#if>
                         </#list>
                         <#if currentPage gte orderDTOPage.getTotalPages()>
                             <li class="disabled"><a href="#">后一页</a></li>
                         <#else>
-                            <li><a href="/sell/seller/order/list?page=${currentPage+1}&${size}">后一页</a></li>
+                            <li><a href="/sell/seller/order/list?page=${currentPage+1}&size=${size}">后一页</a></li>
                         </#if>
                     </ul>
                 </div>

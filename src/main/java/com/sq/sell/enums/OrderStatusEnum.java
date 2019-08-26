@@ -2,6 +2,10 @@ package com.sq.sell.enums;
 
 import lombok.Getter;
 
+/**
+ * 枚举类的实例由编译器自动创建，在全局中只会存在一个
+ * 可以避免定义的重名
+ */
 @Getter
 public enum OrderStatusEnum implements CodeEnum{
     NEW(0,"新订单"),

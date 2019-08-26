@@ -39,14 +39,18 @@ public class SellerAuthorizeAspect {
         HttpServletRequest request = attributes.getRequest();
 
         Cookie cookie;
+
         try{
              cookie = CookieUtil.get(request, CookieConstant.TOKEN);
+             if(cookie == null)
+             {
+                 throw new Exception();
+             }
         }catch (Exception e)
         {
             log.warn("【登录校验】cookie中不存在token");
             throw new SellerAuthorizeException();
         }
-
 
 
         String tokenValue = redisTemplate.opsForValue()

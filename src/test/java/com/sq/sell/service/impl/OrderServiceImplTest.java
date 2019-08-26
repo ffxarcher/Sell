@@ -44,10 +44,9 @@ public class OrderServiceImplTest extends SellApplicationTests {
     }
 
     @Test
-    @Ignore
     public void findOne()
     {
-        System.out.println(orderService.findOne("1234567").getOrderDetailList());
+        System.out.println(orderService.findOne("123567").getOrderDetailList());
     }
 
     @Test

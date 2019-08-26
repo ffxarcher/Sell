@@ -24,11 +24,13 @@ wechat:
   templateId:
     orderStatus: mH7l4Lrk9MwsrECQXqxTs0zr_xo_0I9-Hn4gTx-GcNs
 
-projecturl:
-  sell: http://sqmysell.natapp1.cc
+
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.sq.sell.entity
   configuration:
     map-underscore-to-camel-case: true
+
+projecturl:
+  sell: http://localhost:8080

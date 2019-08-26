@@ -68,7 +68,7 @@ public class SellerOrderController {
         try {
             orderDTO = orderService.findOne(orderId);
         } catch (SellException e) {
-            log.error("【卖家端取消订单】发生错误 {}",e);
+            log.error("【卖家端查找订单】发生错误 {}",e);
             map.put("msg", e.getMessage());
             map.put("url", "/sell/seller/order/list");
             return new ModelAndView("common/error", map);
